@@ -1,11 +1,11 @@
 [tool.poetry]
 name = "darbiadev-labels"
-version = "0.2.0"
+version = "0.3.0"
 description = "darbiadev-labels"
 authors = ["Bradley Reynolds <bradley.reynolds@darbia.dev>"]
 license = "MIT"
 readme = "README.md"
-repository = "https://github.com/DarbiaDev/darbiadev-labels"
+repository = "https://github.com/darbiadev/darbiadev-labels"
 documentation = "https://darbiadev.github.io/darbiadev-labels/"
 
 [tool.poetry.dependencies]
