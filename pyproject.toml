@@ -1,41 +1,57 @@
-[tool.poetry]
+[project]
 name = "darbiadev-labels"
 version = "0.3.0"
-description = "darbiadev-labels"
-authors = ["Bradley Reynolds <bradley.reynolds@darbia.dev>"]
-license = "MIT"
+description = "Namespace for label functions"
 readme = "README.md"
-repository = "https://github.com/darbiadev/darbiadev-labels"
-documentation = "https://darbiadev.github.io/darbiadev-labels/"
+authors = [
+    { name = "Bradley Reynolds", email = "bradley.reynolds@darbia.dev" },
+]
+license = { text = "MIT" }
+requires-python = ">=3.7"
+dependencies = [
+    "reportlab",
+    "pystrich",
+]
 
-[tool.poetry.dependencies]
-python = "^3.9"
+[project.urls]
+repository = "https://github.com/darbiadev/darbiadev-labels/"
+documentation = "https://docs.darbia.dev/darbiadev-labels/"
 
-reportlab = "^3.5.68"
-pyStrich = "^0.8"
-
-sphinx = { version = ">=4.1.1,<6.0.0", optional = true }
-sphinx-autodoc-annotation = { version =  "^1.0-1", optional = true }
-sphinxcontrib-packages = { version = "^1.0.1", optional = true }
-sphinxcontrib-napoleon = { version =  "^0.7", optional = true }
-sphinxcontrib-apidoc = { version = "^0.3.0", optional = true }
-sphinx-rtd-theme = { version = ">=0.5.2,<1.1.0", optional = true }
-pytest = { version = ">=6.2.4,<8.0.0", optional = true }
-tox = { version = "^3.24.0", optional = true }
-toml = { version = "^0.10.2", optional = true }
-
-[tool.poetry.extras]
-docs = ['sphinx', 'sphinx-autodoc-annotation', 'sphinxcontrib-packages', 'sphinxcontrib-napoleon', 'sphinxcontrib-apidoc','sphinx_rtd_theme', 'toml']
-tests = ['pytest', 'tox']
-
-[tool.poetry.dev-dependencies]
+[project.optional-dependencies]
+dev = [
+    "pylint>=2.12.2",
+    "pytest>=6.2.5",
+    "pytest-cov>=3.0.0",
+    "black>=21.12b0",
+]
+tests = [
+    "pytest>=6.2.5",
+]
+docs = [
+    "sphinx>=4.3.2",
+    "sphinxcontrib-autoprogram>=0.1.7",
+    "sphinx-rtd-theme>=1.0.0",
+    "toml>=0.10.2",
+]
 
 [build-system]
-requires = ["poetry-core>=1.0.0"]
-build-backend = "poetry.core.masonry.api"
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
 
-[tool.tox]
-legacy_tox_ini = """
-[tox]
-isolated_build = True
-"""
+[tool.sphinx]
+copyright = "Darbia"
+author = "Bradley Reynolds"
+api_dir = "darbiadev_labels"
+
+[tool.black]
+target-version = ["py310"]
+line-length = 120
+
+[tool.isort]
+profile = "black"
+
+[tool.pytest.ini_options]
+addopts = "tests -r a -v --doctest-modules src"
+
+[tool.pylint.format]
+max-line-length = 120
