@@ -1,6 +1,6 @@
 [project]
 name = "darbiadev-labels"
-version = "0.3.0"
+version = "0.4.0"
 description = "Namespace for label functions"
 readme = "README.md"
 authors = [
