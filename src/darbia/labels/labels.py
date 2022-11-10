@@ -1,5 +1,8 @@
+"""Labels"""
+
+from __future__ import annotations
+
 from io import BytesIO
-from pathlib import Path
 
 from pystrich.datamatrix import DataMatrixEncoder
 from reportlab.graphics.barcode import code128
@@ -9,6 +12,7 @@ from reportlab.pdfgen.canvas import Canvas
 
 
 def code128_one_line(barcode_values: list[str], line_one_values: list[str]) -> BytesIO:
+    """Code 128 with one extra line"""
     bytes_ = BytesIO()
     canvas = Canvas(bytes_, pagesize=(4 * inch, 6 * inch))
     for barcode_value, line_one_value in zip(barcode_values, line_one_values):
@@ -23,10 +27,12 @@ def code128_one_line(barcode_values: list[str], line_one_values: list[str]) -> B
 
 
 def code128_only(values: list[str]) -> BytesIO:
+    """Code 128 using the one line as a bigger barcode value"""
     return code128_one_line(barcode_values=values, line_one_values=values)
 
 
 def datamatrix_one_line(barcode_values: list[str], line_one_values: list[str]) -> BytesIO:
+    """Datamatrix with one extra line"""
     bytes_ = BytesIO()
     canvas = Canvas(bytes_, pagesize=(4 * inch, 6 * inch))
     for barcode_value, line_one_value in zip(barcode_values, line_one_values):
@@ -40,12 +46,5 @@ def datamatrix_one_line(barcode_values: list[str], line_one_values: list[str]) -
 
 
 def datamatrix_only(values: list[str]) -> BytesIO:
+    """Datamatrix using the one line as a bigger barcode value"""
     return datamatrix_one_line(barcode_values=values, line_one_values=values)
-
-
-if __name__ == "__main__":
-    out_directory = Path(".")
-    with open(out_directory / "BCP-code128.pdf", "wb") as file:
-        file.write(code128_only(list(prefix_zfilled("BCP", range(1, 50), sep=""))).read())
-    with open(out_directory / "BCP-datamatrix.pdf", "wb") as file:
-        file.write(datamatrix_only(list(prefix_zfilled("BCP", range(1, 50), sep=""))).read())
